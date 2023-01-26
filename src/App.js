@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import expChanger from "./expChanger";
+import expCalculate from "./expCalculate";
+import expToArr from "./expToArr";
 
 function App() {
+  const [result, setResult] = useState("");
+  const [exp, setExp] = useState("");
+
+  const onChange = (e) => setExp(e.target.value);
+  const onCalClick = () => setResult(expCalculate(expChanger(expToArr(exp))));
+  const onResetClick = () => setExp("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>exp : {exp}</p>
+      <p>result : {result}</p>
+      <input type="text" value={exp} onChange={onChange} />
+      <button onClick={onCalClick}>calculate</button>
+      <button onClick={onResetClick}>reset</button>
     </div>
   );
 }
